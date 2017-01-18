@@ -1,6 +1,38 @@
+body
+{
+    margin: 0px;
+    padding:0px;
+    background: #FCFCFC;
+}
 .box
 {
-    width: 100px;
-    height: 200px;
-    border: 5px red solid;
+    margin: auto;
+    margin-top: 50px;
+    width: 900px;
+    height: 800px;
+}
+.talk
+{
+    width: 75%;
+    height: 100%;
+    border-bottom: 0px red solid;
+    float: left;
+}
+.users
+{
+    width: 20%;
+    height: 600px;
+    border: 1px red solid;
+    float: left;
+}
+.talk_show
+{
+    height: 600px;
+    border: 1px blue solid;
+}
+
+.talk_in
+{
+    height: 190px;
+    position: relative;
 }
