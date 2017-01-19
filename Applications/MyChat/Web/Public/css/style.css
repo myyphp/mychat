@@ -29,6 +29,8 @@ body
 {
     height: 600px;
     border: 1px blue solid;
+    padding: 10px;
+    line-height: 10px;
 }
 
 .talk_in

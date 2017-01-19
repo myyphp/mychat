@@ -35,10 +35,24 @@ class Events
      * @param int $client_id 连接id
      */
     public static function onConnect($client_id) {
-        // 向当前client_id发送数据 
-        Gateway::sendToClient($client_id, "Hello $client_id\n");
+        // 向当前client_id发送数据: 在线用户列表
+        //调试使用 var_export
+        $sessions = Gateway::getAllClientSessions();
+        $user_list = array();
+        foreach ($sessions as $key => $v) {
+            $user_list[] = $key;
+        }
+        $info = array(
+            'type' => 'user_list',
+            'data' => $user_list
+        );
+
+        Gateway::sendToClient($client_id, json_encode($info));
+        //Gateway::sendToClient($client_id, "Hello $client_id\n");
+
         // 向所有人发送
-        Gateway::sendToAll("$client_id login\n");
+        //Gateway::sendToAll("$client_id login\n");
+
     }
     
    /**

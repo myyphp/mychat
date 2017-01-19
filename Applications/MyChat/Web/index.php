@@ -36,13 +36,36 @@
 
 <script type="text/javascript">
     var websocket;
-    window.onload = initWebSocket();
+    window.onload = web_init;
+
+    function web_init() {
+        initWebSocket();
+    }
+
+    /**
+     * 初始化用户名
+     */
+    function initUserName() {
+        var userName;
+        userName = window.prompt("请输入您的昵称");
+        //对昵称进行合法性处理 略...
+        //记录到cookie
+        $.cookie("name", userName, 3600);
+    }
+
+    /**
+     * 发送消息时的逻辑处理
+     */
     function onSubmit() {
         var msg;
         msg = $('#talkin').val();
         websocket.send(msg);
         $('#talkin').val('');
     }
+
+    /**
+     * websocket初始化
+     */
     function initWebSocket() {
         if (window.WebSocket != undefined) {
             websocket = new WebSocket("ws://"+document.domain+":8282");
@@ -55,27 +78,32 @@
         }
     };
 
+
     function onopen() {
         console . log ( 'SUCCESS');
+        initUserName();
     }
     function onerr() {
         //连接失败
         console . log ( 'ERR');
     }
     function onclose() {
-            //连接断开
-            alert('连接断开');
+        //连接断开
+        console . log ( 'CLOSE');
     };
 
     function onmsg(msg) {
         //消息接收
-        //alert(msg.data);
-        var msg = msg.data;
-        msg += "<br/>";
+        var data = eval("("+msg.data+")");
+        switch (data['type'] == 'user_list') {
+
+        }
+
         $("#show_msg").append(msg);
     }
 </script>
 <script type="text/javascript" src="/public/js/jquery.js"></script>
+<script type="text/javascript" src="/public/js/jquery.cookie.js"></script>
 </body>
 </html>
 
